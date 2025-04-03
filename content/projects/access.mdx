@@ -1,76 +1,33 @@
 ---
-title: "@chronark/access"
-description: A minimal library for access control. It is designed to be used together with opaque access tokens by providing a simple interface to define roles with different access permissions and verifying requests to resources.
-repository: chronark/access
-date: "2022-11-13"
+title: "Ignition Finance"
+description: A mobile application designed to empower users on their journey toward financial independence and early retirement (FIRE). The app offers intuitive financial tracking, personalized insights, and advanced simulation tools to help you manage your portfolio and plan for a secure future.
+repository: Teto03/IgnitionFinance
+date: "2025-04-03"
 published: true
   
 ---
-A minimal library for access control. It is designed to be used together with opaque access tokens by providing a simple interface to define roles with different access permissions and verifying requests to resources.
+A mobile application designed to empower users on their journey toward financial independence and early retirement (FIRE). The app offers intuitive financial tracking, personalized insights, and advanced simulation tools to help you manage your portfolio and plan for a secure future.
 
-- Fully typed
-- Zero dependencies
-- Serializable to store in a database
+- Intuitive financial tracking
+- Personalized insights
+- Advanced simulation tools
+- Portfolio management
+- Retirement planning
 
-## Install
+## Overview
 
-```sh-session
-npm i @chronark/access
-```
+Ignition Finance helps users track their financial progress toward FIRE (Financial Independence, Retire Early) goals through a comprehensive yet user-friendly mobile interface. The application provides tools for monitoring investments, analyzing spending patterns, and projecting future financial scenarios.
 
-## Usage
+## Features
 
-```ts
-import { AccessControl, Role } from "@chronark/access";
+- Portfolio Tracking: Monitor your investments across multiple asset classes
+- Expense Management: Track and categorize spending to optimize savings
+- FIRE Calculator: Simulate retirement scenarios based on current savings and investment rates
+- Personalized Insights: Receive tailored recommendations to accelerate your path to financial independence
+- Goal Setting: Define and track progress toward custom financial milestones
 
-/**
- * Define all your resources and their access patterns
- *
- * key => resource
- * value => array of access types
- */
-type Statements = {
-  user: ["read", "write", "dance"];
-  team: ["read", "write"];
-};
+For more detailed information on the app's architecture, components, and functionalities, please refer to the documentation file located in the documentation folder. This app was developed as a project for the Programmation of Mobile Devices exam at Universita' di Milano Bicocca. The app is the result of the cooperation of the Ignition Finance team.
 
-/**
- * Create an access control instance and pass the Statements type to enjoy full
- * type safety
- */
-const ac = new AccessControl<Statements>();
+For the complete source code and to see the collaborative work done by the team, visit the [GitHub repository](https://github.com/Teto03/IgnitionFinance).
 
-/**
- * Now you can define one or more roles by specifying the access permissions
- *
- * This is already fully typed and typescript will let you know if you try to
- * use anything, that is not defined in the Statements type.
- */
-const role = ac.newRole({
-  user: ["read", "write"],
-  team: ["read"],
-});
-
-/**
- * Simulate storing and retrieving the role in a database
- *
- * The idea here is, that you can store permissions alongside an API token.
- * Now, when you verify the token, you can also verify the access permissions.
- */
-const serialized = role.toString();
-
-/**
- * Note how you can pass in the Statements type again, to get full type safety
- */
-const recovered = Role.fromString<Statements>(serialized);
-
-/**
- * Validate the role by specifying the resource and the required access
- *
- * everything is fully typed
- */
-const res = recovered.authorize({"team", ["read"]});
-
-// res.success => boolean
-// res.error => string | undefined provides a reason for failure
-```
+Credits: Brighenti Stefano, Buser Daniele, Benbouzid Hicham.

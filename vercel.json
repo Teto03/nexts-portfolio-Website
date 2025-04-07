@@ -4,6 +4,12 @@
   "redirects": [
     {
       "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "nextjs-portfolio-onoxn7nmz-francesco-bianchis-projects.vercel.app"
+        }
+      ],
       "destination": "https://bianchifrancesco.dev/:path*",
       "permanent": true
     }

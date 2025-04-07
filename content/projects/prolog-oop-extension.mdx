@@ -1,0 +1,50 @@
+---
+title: "Prolog OOP Extension"
+description: An object-oriented programming extension for Prolog, providing primitives for class and instance management, inheritance, and method handling.
+repository: Teto03/PROLOG_OOP_EXTENSION
+date: "2023-10-01"
+published: true
+---
+
+The Prolog OOP Extension is a project that introduces object-oriented programming capabilities to Prolog. It provides a set of predicates for defining classes, creating instances, managing inheritance, and invoking methods.
+
+## Overview
+
+This extension allows developers to define classes, create instances, and perform type checks. It also supports inheritance, field extraction, and method invocation, making Prolog more versatile for modern programming paradigms.
+
+## Features
+
+- **Class Definition**: Define new classes with fields and methods.
+- **Instance Creation**: Create instances of classes with type-checked fields.
+- **Inheritance**: Support for single and multiple inheritance.
+- **Field Access**: Extract field values from instances and classes.
+- **Method Handling**: Define and invoke methods with support for inheritance.
+- **Type Checking**: Ensure field values conform to declared types.
+
+## Technical Details
+
+- **Primitives**:
+  - `def_class`: Define a new class.
+  - `make`: Create a new instance of a class.
+  - `is_class`: Check if a symbol represents a valid class.
+  - `is_instance`: Verify if a value is a valid instance of a class.
+  - `field` and `fieldx`: Extract field values from instances.
+- **Utility Functions**:
+  - `check_parts`, `check_parts_instance`, `is_valid`, `valid_value`, and more.
+- **Inheritance**:
+  - Extract superclass fields and methods using `all_superclasses`.
+  - Ensure field types in subclasses are compatible with superclasses.
+- **Method Handling**:
+  - Define methods using `process_methods`.
+  - Invoke methods using `call_methods`.
+
+For more details, refer to the [GitHub repository](https://github.com/Teto03/PROLOG_OOP_EXTENSION).
+
+## Credits
+
+This project was developed as part of the "Programming Languages" course. It showcases the integration of object-oriented principles into Prolog.
+
+Contributors:
+- Stefano Brighenti
+- Daniele Buser
+- Hicham Benbouzid

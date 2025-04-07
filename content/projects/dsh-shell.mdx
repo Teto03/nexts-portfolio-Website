@@ -1,0 +1,61 @@
+---
+title: "DSH Shell"
+description: A simple shell implementation in C with support for command execution, path management, output redirection, and pipes.
+repository: Teto03/DSH_shell
+date: "2023-10-01"
+published: true
+---
+
+The DSH Shell is a straightforward implementation of a shell in the C programming language. It provides basic functionalities such as executing commands, managing paths, redirecting output, and using pipes.
+
+## Overview
+
+This project demonstrates how to implement a basic shell in C. It includes essential features for command execution and process management, making it a useful learning tool for understanding shell internals.
+
+## Features
+
+- **Command Execution**: Execute commands specified within the system path.
+- **Path Management**: Set the command search path using the `setpath` command.
+- **Output Redirection**: Redirect output using the symbols `>` and `>>`.
+- **Pipes**: Support for pipes using the `|` symbol.
+
+## Technical Details
+
+- **Code Structure**:
+  - `panic`: Prints an error message and terminates execution.
+  - `prompt`: Displays the shell prompt and reads user input.
+  - `set_path`: Sets the search path for commands.
+  - `path_lookup`: Searches for a command within the specified path.
+  - `rel2abs`: Converts a relative path into an absolute path.
+  - `do_redir`: Handles output redirection.
+  - `do_pipe`: Manages the use of pipes.
+  - `do_exec`: Executes a command.
+  - `main`: Governs the shell's lifecycle.
+
+## How to Compile and Run
+
+To compile the code, use the following command:
+```bash
+$ gcc -o dsh dsh.c
+```
+
+To execute the shell, use the command:
+```bash
+$ ./dsh
+```
+
+## Notes
+
+- This project is intended as an educational example and does not include all the features of a full-fledged shell.
+- Due to the use of the `sys/wait` library, the code must be executed in a **Linux environment**. It will not function on Windows.
+
+For more details, refer to the [GitHub repository](https://github.com/Teto03/DSH_shell).
+
+## Credits
+
+This project was developed as part of the "Programming Languages" course. It showcases the implementation of a basic shell in C.
+
+Contributors:
+- Stefano Brighenti
+- Daniele Buser
+- Hicham Benbouzid

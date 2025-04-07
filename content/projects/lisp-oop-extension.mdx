@@ -1,0 +1,47 @@
+---
+title: "LISP OOP Extension"
+description: An object-oriented programming extension for LISP, providing primitives for class and instance management, type checking, and method handling.
+repository: Teto03/LISP_OOP_EXSTENSION
+date: "2023-10-01"
+published: true
+---
+
+The LISP OOP Extension is a project that introduces object-oriented programming capabilities to the LISP language. It provides a set of primitives for defining classes, creating instances, and managing fields and methods.
+
+## Overview
+
+This extension allows developers to define classes, create instances, and perform type checks. It also supports inheritance, field extraction, and method invocation, making LISP more versatile for modern programming paradigms.
+
+## Features
+
+- **Class Definition**: Define new classes with fields and methods.
+- **Instance Creation**: Create instances of classes with type-checked fields.
+- **Inheritance**: Support for single and multiple inheritance.
+- **Field Access**: Extract field values from instances and classes.
+- **Method Handling**: Define and invoke methods with support for inheritance.
+- **Type Checking**: Ensure field values conform to declared types.
+
+## Technical Details
+
+- **Primitives**:
+  - `def-class`: Define a new class.
+  - `make`: Create a new instance of a class.
+  - `is-class`: Check if a symbol represents a valid class.
+  - `is-instance`: Verify if a value is a valid instance of a class.
+  - `field` and `field*`: Extract field values from instances.
+- **Utility Functions**:
+  - `partition`, `check-symbol`, `type-check`, `field-extract`, and more.
+- **Inheritance**:
+  - Extract superclass fields and methods using `sup-classes-extract`.
+  - Ensure field types in subclasses are compatible with superclasses.
+
+For more details, refer to the [GitHub repository](https://github.com/Teto03/LISP_OOP_EXSTENSION).
+
+## Credits
+
+This project was developed as part of the "Programming Languages" course. It showcases the integration of object-oriented principles into LISP.
+
+Contributors:
+- Stefano Brighenti
+- Daniele Buser
+- Hicham Benbouzid

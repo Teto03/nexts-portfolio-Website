@@ -1,0 +1,41 @@
+---
+title: "DomainWebApp"
+description: A web platform that allows users to purchase, renew, and manage web domains, with additional features like contacting domain owners and viewing domain details.
+repository: Teto03/DomainWebApp
+date: "2023-12-01"
+published: true
+---
+
+Domains.com è un sito internet che permette l'acquisto di uno o più domini web. Tra le funzionalità offerte dalla nostra piattaforma ci sono le seguenti:
+
+- Acquisto di un nuovo dominio
+- Acquisto di un dominio da me posseduto in passato e scaduto (a patto che non lo abbiano comprato altri)
+- Rinnovo di un dominio da me posseduto e non ancora scaduto
+- Possibilità di visualizzare le informazioni inerenti ad un dominio posseduto da altri
+- Possibilità di contattare il proprietario di un dominio a cui sono interessato tramite mail
+- Visionare il catalogo di tutti i domini in mio possesso (scaduti e non)
+
+## Overview
+
+Il progetto è stato sviluppato come parte del corso "Sistemi Distribuiti 2023-2024". La piattaforma è composta da un client web, un server web e un database documentale. È stata progettata per offrire un'interfaccia intuitiva e funzionalità avanzate per la gestione dei domini.
+
+## Features
+
+- **Acquisto e rinnovo domini**: Gestione completa dei domini, inclusi acquisto, rinnovo e recupero di domini scaduti.
+- **Visualizzazione dettagli dominio**: Accesso alle informazioni di dominio e possibilità di contattare i proprietari.
+- **Gestione personale**: Catalogo completo dei domini posseduti, sia attivi che scaduti.
+- **Architettura distribuita**: Utilizzo di un database documentale e API REST per la comunicazione tra client e server.
+
+## Technical Details
+
+- **Server Web**: Utilizza Jetty e Jersey per esporre le API REST.
+- **Database**: Applicazione Java con una HashMap per gestire le collezioni (`registrations`, `domains`, `orders`).
+- **Client Web**: HTML, CSS, e JavaScript con supporto per Live Server.
+
+Per ulteriori dettagli, consulta il [repository GitHub](https://github.com/Teto03/DomainWebApp).
+
+## Credits
+
+- Francesco Bianchi (902251) - f.bianchi85@campus.unimib.it
+- Stefano Brighenti (900153) - s.brighenti4@campus.unimib.it
+- Daniele Buser (894514) - d.buser@campus.unimib.it

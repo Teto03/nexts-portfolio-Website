@@ -1,6 +1,6 @@
 import "../global.css";
-import { Inter } from "@next/font/google";
-import LocalFont from "@next/font/local";
+import { Inter } from "next/font/google";
+import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
 
@@ -16,13 +16,6 @@ export const metadata: Metadata = {
       "Student of computer science and technology at UNIMIB, passionate about programming and web development.",
     url: "https://bianchifrancesco.dev",
     siteName: "bianchifrancesco.dev",
-    images: [
-      {
-        url: "https://chronark.com/og.png",
-        width: 1920,
-        height: 1080,
-      },
-    ],
     locale: "en-US",
     type: "website",
   },

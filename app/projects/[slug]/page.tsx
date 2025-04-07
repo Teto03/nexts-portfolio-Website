@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
-import { allProjects } from "contentlayer/generated";
+// ...existing code...
+import { allProjects } from "@/.contentlayer/generated";
+// ...existing code...
 import { Mdx } from "@/app/components/mdx";
 import { Header } from "./header";
 import "./mdx.css";

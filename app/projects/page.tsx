@@ -44,7 +44,7 @@ export default async function ProjectsPage() {
           <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
             Projects
           </h2>
-          <p className="mt-4 text-zinc-400">
+          <p className="mt-4 mb-6 text-zinc-400">
             Some of the projects are made for university exams and some are on my own time.
           </p>
         </div>
@@ -54,7 +54,7 @@ export default async function ProjectsPage() {
           {sorted.map((project) => (
             <Card key={project.slug}>
               <Link href={`/projects/${project.slug}`}>
-                <article className="relative w-full h-full p-4 md:p-8">
+                <article className="relative w-full h-full p-4 md:p-8 flex flex-col min-h-[320px]">
                   <div className="flex items-center justify-between gap-2">
                     <div className="text-xs text-zinc-100">
                       {project.date ? (
@@ -84,7 +84,7 @@ export default async function ProjectsPage() {
                   <p className="mt-4 leading-8 duration-150 text-zinc-400 group-hover:text-zinc-300">
                     {project.description}
                   </p>
-                  <div className="absolute bottom-4 md:bottom-8">
+                  <div className="mt-auto pt-4">
                     <p className="hidden text-zinc-200 hover:text-zinc-50 lg:block">
                       Read more <span aria-hidden="true">&rarr;</span>
                     </p>

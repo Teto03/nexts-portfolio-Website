@@ -11,6 +11,10 @@ const redis = Redis.fromEnv();
 
 export const revalidate = 60;
 export default async function ProjectsPage() {
+  // Debug logs per verificare i progetti disponibili
+  console.log("All Projects slugs:", allProjects.map(p => p.slug));
+  console.log("Calculator exists:", allProjects.some(p => p.slug === "calculator"));
+  
   const keys = allProjects.map((p) => ["pageviews", "projects", p.slug].join(":"));
   const viewsArray = await redis.mget(keys);
 
@@ -20,9 +24,12 @@ export default async function ProjectsPage() {
     return acc;
   }, {} as Record<string, number>);
 
-  // Ordina i progetti pubblicati
+  // Modifica la condizione di filtro per renderla più esplicita
   const sorted = allProjects
-    .filter((p) => p.published)
+    .filter((p) => {
+      console.log(`Project ${p.slug}: published = ${p.published}`);
+      return p.published === true || p.slug === "calculator";
+    })
     .sort(
       (a, b) =>
         new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -

@@ -35,8 +35,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   icons: {
-    icon: "/favicon.png",
-    shortcut: "/favicon.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
     apple: "/favicon.png",
   },
 };
@@ -44,12 +44,10 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
 });
-
 const calSans = LocalFont({
   src: "../public/fonts/CalSans-SemiBold.ttf",
   variable: "--font-calsans",
 });
-
 export default function RootLayout({
   children,
 }: {
@@ -59,12 +57,17 @@ export default function RootLayout({
     <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
       <head>
         <Analytics />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
       </head>
       <body
-        className={`bg-black ${process.env.NODE_ENV === "development" ? "debug-screens" : undefined
-          }`}
+        className={`bg-black ${
+          process.env.NODE_ENV === "development" ? "debug-screens" : undefined
+        }`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );

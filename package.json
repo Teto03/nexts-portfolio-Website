@@ -1,5 +1,5 @@
 {
-  "name": "chronark.com",
+  "name": "bianchifrancesco.dev",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,6 @@
     "rebuild": "node scripts/rebuild-contentlayer.js && pnpm run dev"
   },
   "dependencies": {
-    "@next/font": "^13.5.4",
     "@next/mdx": "^13.5.4",
     "@upstash/redis": "^1.23.3",
     "contentlayer": "^0.3.4",

@@ -1,9 +1,0 @@
-// ...existing code...
-
-module.exports = {
-  // ...existing code...
-  images: {
-    domains: ['bianchifrancesco.dev', 'nextjs-portfolio-onoxn7nmz-francesco-bianchis-projects.vercel.app'],
-  },
-  // ...existing code...
-}

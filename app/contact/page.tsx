@@ -35,8 +35,8 @@ export default function Example() {
 	return (
 		<div className=" bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0">
 			<Navigation />
-			<div className="container flex items-center justify-center min-h-screen px-4 mx-auto">
-				<div className="grid w-full grid-cols-1 gap-8 mx-auto mt-32 sm:mt-0 sm:grid-cols-3 lg:gap-16">
+			<div className="container flex items-center justify-center min-h-[100dvh] px-4 mx-auto pt-32 pb-16 sm:py-0">
+				<div className="grid w-full grid-cols-1 gap-8 mx-auto sm:grid-cols-2 lg:grid-cols-4 lg:gap-8 xl:gap-16">
 					{socials.map((s) => (
 						<Card key={s.label}>
 							<Link

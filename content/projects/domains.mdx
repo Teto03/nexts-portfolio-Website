@@ -4,38 +4,40 @@ description: A web platform that allows users to purchase, renew, and manage web
 repository: Teto03/DomainWebApp
 date: "2023-12-01"
 published: true
+tags:
+  - Java
+  - REST
+  - Distributed Systems
+  - Jetty
+contributors:
+  - Stefano Brighenti
+  - Daniele Buser
 ---
 
-Domains.com è un sito internet che permette l'acquisto di uno o più domini web. Tra le funzionalità offerte dalla nostra piattaforma ci sono le seguenti:
+Domains.com is a web platform that allows users to purchase, renew and manage one or more web domains. Among the features offered by the platform:
 
-- Acquisto di un nuovo dominio
-- Acquisto di un dominio da me posseduto in passato e scaduto (a patto che non lo abbiano comprato altri)
-- Rinnovo di un dominio da me posseduto e non ancora scaduto
-- Possibilità di visualizzare le informazioni inerenti ad un dominio posseduto da altri
-- Possibilità di contattare il proprietario di un dominio a cui sono interessato tramite mail
-- Visionare il catalogo di tutti i domini in mio possesso (scaduti e non)
+- Purchase of a new domain
+- Re-purchase of a previously owned domain that has since expired (as long as it has not been bought by someone else)
+- Renewal of an active domain
+- View detailed information about domains owned by other users
+- Contact the owner of a domain via email
+- Browse the full catalog of owned domains (active and expired)
 
 ## Overview
 
-Il progetto è stato sviluppato come parte del corso "Sistemi Distribuiti 2023-2024". La piattaforma è composta da un client web, un server web e un database documentale. È stata progettata per offrire un'interfaccia intuitiva e funzionalità avanzate per la gestione dei domini.
+The project was developed as part of the "Distributed Systems 2023-2024" course. The platform is composed of a web client, a web server and a document-oriented database. It was designed to provide an intuitive interface and advanced features for domain management.
 
 ## Features
 
-- **Acquisto e rinnovo domini**: Gestione completa dei domini, inclusi acquisto, rinnovo e recupero di domini scaduti.
-- **Visualizzazione dettagli dominio**: Accesso alle informazioni di dominio e possibilità di contattare i proprietari.
-- **Gestione personale**: Catalogo completo dei domini posseduti, sia attivi che scaduti.
-- **Architettura distribuita**: Utilizzo di un database documentale e API REST per la comunicazione tra client e server.
+- **Domain purchase and renewal**: Complete domain lifecycle management, including purchase, renewal and recovery of expired domains.
+- **Domain detail view**: Access information about any domain and contact its owner.
+- **Personal dashboard**: Full catalog of owned domains (active and expired).
+- **Distributed architecture**: Document database and REST APIs power the client/server communication.
 
 ## Technical Details
 
-- **Server Web**: Utilizza Jetty e Jersey per esporre le API REST.
-- **Database**: Applicazione Java con una HashMap per gestire le collezioni (`registrations`, `domains`, `orders`).
-- **Client Web**: HTML, CSS, e JavaScript con supporto per Live Server.
+- **Web server**: Jetty and Jersey expose the REST APIs.
+- **Database**: Java application backed by a HashMap that manages collections (`registrations`, `domains`, `orders`).
+- **Web client**: HTML, CSS and JavaScript with Live Server support.
 
-Per ulteriori dettagli, consulta il [repository GitHub](https://github.com/Teto03/DomainWebApp).
-
-## Credits
-
-- Francesco Bianchi (902251) - f.bianchi85@campus.unimib.it
-- Stefano Brighenti (900153) - s.brighenti4@campus.unimib.it
-- Daniele Buser (894514) - d.buser@campus.unimib.it
+For more details, see the [GitHub repository](https://github.com/Teto03/DomainWebApp).

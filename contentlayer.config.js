@@ -38,6 +38,22 @@ export const Project = defineDocumentType(() => ({
     repository: {
       type: "string",
     },
+    url: {
+      type: "string",
+    },
+    tags: {
+      type: "list",
+      of: { type: "string" },
+      default: [],
+    },
+    cover: {
+      type: "string",
+    },
+    contributors: {
+      type: "list",
+      of: { type: "string" },
+      default: [],
+    },
   },
   computedFields,
 }));

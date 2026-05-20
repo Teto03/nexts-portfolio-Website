@@ -6,42 +6,43 @@ import { Card } from "../components/card";
 import { Redis } from "@upstash/redis";
 import { Eye } from "lucide-react";
 
-const redis = Redis.fromEnv();
-
 export const revalidate = 60;
 
+async function getViews(slugs: string[]): Promise<Record<string, number>> {
+  if (slugs.length === 0) return {};
+  try {
+    const redis = Redis.fromEnv();
+    const keys = slugs.map((s) => ["pageviews", "projects", s].join(":"));
+    const viewsArray = await redis.mget<number[]>(...keys);
+    return slugs.reduce((acc, slug, i) => {
+      const viewCount = viewsArray?.[i];
+      acc[slug] = typeof viewCount === "number" ? viewCount : 0;
+      return acc;
+    }, {} as Record<string, number>);
+  } catch {
+    return slugs.reduce((acc, slug) => {
+      acc[slug] = 0;
+      return acc;
+    }, {} as Record<string, number>);
+  }
+}
+
 export default async function ProjectsPage() {
-  // Debug logs per verificare i progetti disponibili
-  console.log("All Projects slugs:", allProjects.map(p => p.slug));
-  console.log("Calculator exists:", allProjects.some(p => p.slug === "calculator"));
+  const published = allProjects.filter((p) => p.published === true);
+  const views = await getViews(published.map((p) => p.slug));
 
-  const keys = allProjects.map((p) => ["pageviews", "projects", p.slug].join(":"));
-  const viewsArray = await redis.mget(keys);
-
-  const views = allProjects.reduce((acc, project, i) => {
-    const viewCount = viewsArray?.[i];
-    acc[project.slug] = typeof viewCount === "number" ? viewCount : 0;
-    return acc;
-  }, {} as Record<string, number>);
-
-  // Modifica la condizione di filtro per renderla più esplicita
-  const sorted = allProjects
-    .filter((p) => {
-      console.log(`Project ${p.slug}: published = ${p.published}`);
-      return p.published === true;
-    })
-    .sort(
-      (a, b) =>
-        new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
-        new Date(a.date ?? Number.POSITIVE_INFINITY).getTime(),
-    );
+  const sorted = published.sort(
+    (a, b) =>
+      new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
+      new Date(a.date ?? Number.POSITIVE_INFINITY).getTime(),
+  );
 
   return (
     <div className="relative pb-16">
       <Navigation />
       <div className="px-6 pt-20 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
         <div className="max-w-2xl mx-auto lg:mx-0">
-          <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl font-display">
             Projects
           </h2>
           <p className="mt-4 mb-6 text-zinc-400">
@@ -66,24 +67,33 @@ export default async function ProjectsPage() {
                         <span>SOON</span>
                       )}
                     </div>
-                    <span className="flex items-center gap-1 text-xs text-zinc-500">
+                    <span className="flex items-center gap-1 text-xs text-zinc-400">
                       <Eye className="w-4 h-4" />{" "}
                       {Intl.NumberFormat("en-US", { notation: "compact" }).format(
                         views[project.slug] ?? 0,
                       )}
                     </span>
                   </div>
-                  <h2
-                    id="featured-post"
-                    className="mt-4 text-3xl font-bold text-zinc-100 group-hover:text-white sm:text-4xl font-display"
-                  >
+                  <h2 className="mt-4 text-3xl font-bold text-zinc-100 group-hover:text-white sm:text-4xl font-display">
                     {project.title}
                   </h2>
                   <p className="mt-4 leading-8 duration-150 text-zinc-400 group-hover:text-zinc-300">
                     {project.description}
                   </p>
+                  {project.tags && project.tags.length > 0 ? (
+                    <div className="flex flex-wrap gap-2 mt-4">
+                      {project.tags.slice(0, 5).map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2.5 py-1 text-[11px] bg-zinc-800/80 border border-zinc-700 rounded-md text-zinc-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  ) : null}
                   <div className="mt-auto pt-4">
-                    <p className="hidden text-zinc-200 hover:text-zinc-50 lg:block">
+                    <p className="hidden text-zinc-200 group-hover:text-zinc-50 lg:block">
                       Read more <span aria-hidden="true">&rarr;</span>
                     </p>
                   </div>

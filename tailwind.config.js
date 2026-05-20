@@ -31,6 +31,7 @@ module.exports = {
 			fontFamily: {
 				sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
 				display: ["var(--font-calsans)"],
+				mono: ["var(--font-mono)", ...defaultTheme.fontFamily.mono],
 			},
 			backgroundImage: {
 				"gradient-radial":
@@ -41,8 +42,13 @@ module.exports = {
 				title: "title 3s ease-out forwards",
 				"fade-left": "fade-left 3s ease-in-out forwards",
 				"fade-right": "fade-right 3s ease-in-out forwards",
+				glow: "glow 8s ease-in-out infinite",
 			},
 			keyframes: {
+				glow: {
+					"0%, 100%": { opacity: "0.4" },
+					"50%": { opacity: "1" },
+				},
 				"fade-in": {
 					"0%": {
 						opacity: "0%",

@@ -1,19 +1,21 @@
 import "../global.css";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import LocalFont from "next/font/local";
 import { Metadata } from "next";
 import { Analytics } from "./components/analytics";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://bianchifrancesco.dev"),
   title: {
-    default: "bianchifrancesco.dev",
+    default: "Francesco Bianchi — bianchifrancesco.dev",
     template: "%s | bianchifrancesco.dev",
   },
-  description: "Co-founder of unkey.dev and founder of planetfall.io",
+  description:
+    "Master's student in Computer Science at the University of Trento. Passionate about cybersecurity, machine learning and software engineering.",
   openGraph: {
-    title: "bianchifrancesco.dev",
+    title: "Francesco Bianchi — bianchifrancesco.dev",
     description:
-      "Student of computer science and technology at UNIMIB, passionate about programming and web development.",
+      "Master's student in Computer Science at the University of Trento. Passionate about cybersecurity, machine learning and software engineering.",
     url: "https://bianchifrancesco.dev",
     siteName: "bianchifrancesco.dev",
     locale: "en-US",
@@ -31,7 +33,9 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "Teto",
+    title: "Francesco Bianchi",
+    description:
+      "Master's student in Computer Science at the University of Trento. Passionate about cybersecurity, machine learning and software engineering.",
     card: "summary_large_image",
   },
   icons: {
@@ -43,10 +47,17 @@ export const metadata: Metadata = {
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
 });
 const calSans = LocalFont({
   src: "../public/fonts/CalSans-SemiBold.ttf",
   variable: "--font-calsans",
+  display: "swap",
 });
 export default function RootLayout({
   children,
@@ -54,16 +65,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={[inter.variable, calSans.variable].join(" ")}>
+    <html
+      lang="en"
+      className={[inter.variable, calSans.variable, jetbrainsMono.variable].join(
+        " ",
+      )}
+    >
       <head>
-        <Analytics />
         <link rel="icon" href="/favicon.ico" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/favicon.png" />
       </head>
       <body
         className={`bg-black ${
-          process.env.NODE_ENV === "development" ? "debug-screens" : undefined
+          process.env.NODE_ENV === "development" ? "debug-screens" : ""
         }`}
       >
         {children}

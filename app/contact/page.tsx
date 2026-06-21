@@ -14,9 +14,9 @@ const socials = [
 	},
 	{
 		icon: <Mail size={20} />,
-		href: "mailto:bianchif037@gmail.com",
+		href: "mailto:f.teto03@proton.me",
 		label: "Email",
-		handle: "bianchif037@gmail.com",
+		handle: "f.teto03@proton.me",
 		external: false,
 	},
 	{

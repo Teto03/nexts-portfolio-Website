@@ -27,11 +27,12 @@ export default function Home() {
         </ul>
       </nav>
       <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
+      <div className="aurora absolute -z-10 w-[40rem] h-[40rem] max-w-[90vw] animate-fade-in pointer-events-none" />
       <Particles
         className="absolute inset-0 -z-10 animate-fade-in"
         quantity={60}
       />
-      <h1 className="z-10 text-4xl text-transparent duration-1000 bg-white cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-8xl bg-clip-text text-center px-2 leading-none">
+      <h1 className="z-10 text-4xl text-gradient duration-1000 cursor-default text-edge-outline animate-title font-display sm:text-6xl md:text-8xl text-center px-2 leading-none">
         BIANCHI FRANCESCO
       </h1>
 

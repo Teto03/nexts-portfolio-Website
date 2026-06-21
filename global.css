@@ -4,7 +4,61 @@
 
 @layer base {
   .text-edge-outline {
-    -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
   }
-} 
 
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Accent-tinted custom scrollbar */
+  ::selection {
+    background: rgba(99, 102, 241, 0.35);
+    color: #fff;
+  }
+}
+
+@layer utilities {
+  /* Animated gradient text used for headings */
+  .text-gradient {
+    background-image: linear-gradient(
+      110deg,
+      #f4f4f5 0%,
+      #818cf8 25%,
+      #22d3ee 50%,
+      #a78bfa 75%,
+      #f4f4f5 100%
+    );
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient-pan 8s linear infinite;
+  }
+
+  /* Soft glowing aurora blob for backgrounds */
+  .aurora {
+    background: radial-gradient(
+      circle at center,
+      rgba(99, 102, 241, 0.35) 0%,
+      rgba(34, 211, 238, 0.18) 40%,
+      transparent 70%
+    );
+    filter: blur(60px);
+  }
+
+  .glass {
+    background: rgba(24, 24, 27, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+@keyframes gradient-pan {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 250% 50%;
+  }
+}

@@ -26,7 +26,6 @@ export default function Home() {
           ))}
         </ul>
       </nav>
-      <div className="hidden w-screen h-px animate-glow md:block animate-fade-left bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
       <div className="aurora absolute -z-10 w-[40rem] h-[40rem] max-w-[90vw] animate-fade-in pointer-events-none" />
       <Particles
         className="absolute inset-0 -z-10 animate-fade-in"
@@ -36,7 +35,6 @@ export default function Home() {
         BIANCHI FRANCESCO
       </h1>
 
-      <div className="hidden w-screen h-px animate-glow md:block animate-fade-right bg-gradient-to-r from-zinc-300/0 via-zinc-300/50 to-zinc-300/0" />
       <div className="my-12 sm:my-16 text-center animate-fade-in max-w-2xl">
         <h2 className="text-sm sm:text-base text-zinc-400 text-balance leading-relaxed">
           Master&rsquo;s student in Computer Science at the University of Trento, passionate about technology and cybersecurity, driven to solve problems and create innovative solutions.

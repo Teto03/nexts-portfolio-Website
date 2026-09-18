@@ -1,0 +1,60 @@
+---
+title: "Distributed Denial of Systems"
+description: A quorum-based total order broadcast protocol for a replicated integer-array store, with coordinator election on failure. Built with Java and Akka actors.
+repository: Teto03/Distributed_Denial_of_Systems
+date: "2026-08-25"
+published: true
+tags:
+  - Java
+  - Akka
+  - Distributed Systems
+  - Gradle
+contributors:
+  - Alessandro Marostica
+---
+
+A replicated integer-array store coordinated by a distinguished replica through a two-phase total order broadcast protocol (UPDATE → quorum of ACKs → WRITEOK). When the coordinator crashes, a new one is elected via a ring-based algorithm that picks the replica holding the most recent update, with ties broken by the highest replica ID. The newly elected coordinator then completes any update left pending by the previous epoch, preserving uniform agreement.
+
+## Overview
+
+Built as a Distributed Systems coursework project, the system implements a quorum-based total order broadcast for replicated databases. It focuses on correctness under coordinator failure, using a ring-based election algorithm to guarantee uniform agreement is preserved across epochs.
+
+## Features
+
+- **Two-phase update protocol**: UPDATE → quorum ACKs → WRITEOK for total order broadcast.
+- **Ring-based coordinator election**: triggered on coordinator crash, selecting the replica with the most recent update (ties broken by highest replica ID).
+- **Epoch recovery**: the new coordinator completes any update left pending by the previous epoch.
+- **FIFO network simulation**: a `NetworkChannel` actor models bounded random latency between replicas.
+- **Structured logging**: all output routes through `Logger.log`/`Logger.debug` with millisecond-precision timestamps, since direct prints would break the timing-sensitive test suite.
+
+## Technical Details
+
+Implemented in **Java 21** with the **Akka actor framework** for concurrency and distributed messaging, built with **Gradle 9.2.1**.
+
+Sources live under `src/main/java/it/unitn/ds/`:
+
+- `Replica`: replica logic — read, write, election, synchronization.
+- `Client`: client logic — send requests, manage read/write timeouts.
+- `AbstractReplica` / `AbstractClient`: base actor classes exposing the test API.
+- `NetworkChannel`: FIFO channel actor with bounded random latency.
+- `Main`: demo entry point.
+
+## How to Build and Run
+
+A Gradle wrapper is committed with the sources (JDK 17+ required):
+
+```bash
+./gradlew build      # compile everything
+./gradlew run        # launch the demo Main
+./gradlew test       # run the supplied test suite
+```
+
+## Documentation & Source
+
+- GitHub repository: [Teto03/Distributed_Denial_of_Systems](https://github.com/Teto03/Distributed_Denial_of_Systems)
+- Specification, slides and planning notes: `docs/`
+- LaTeX report sources: `report/`
+
+## Credits
+
+Developed as part of the Distributed Systems course (2025-2026), in collaboration with Alessandro Marostica.

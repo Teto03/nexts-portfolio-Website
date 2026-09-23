@@ -14,7 +14,14 @@ type Props = {
   }>;
 };
 
-const redis = Redis.fromEnv();
+async function getViews(slug: string): Promise<number> {
+  try {
+    const redis = Redis.fromEnv();
+    return (await redis.get<number>(["pageviews", "projects", slug].join(":"))) ?? 0;
+  } catch {
+    return 0;
+  }
+}
 
 export async function generateStaticParams() {
   return allProjects
@@ -32,8 +39,7 @@ export default async function PostPage({ params }: Props) {
     notFound();
   }
 
-  const views =
-    (await redis.get<number>(["pageviews", "projects", slug].join(":"))) ?? 0;
+  const views = await getViews(slug);
 
   const contributors = (project as { contributors?: string[] }).contributors;
 

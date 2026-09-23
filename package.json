@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npx contentlayer build && next build",
+    "build": "NODE_ENV=production npx contentlayer build --clearCache && next build",
     "start": "next start",
     "fmt": "npx rome check . --apply-unsafe && npx rome format . --write",
     "rebuild": "node scripts/rebuild-contentlayer.js && npm run dev",
-    "contentlayer": "npx contentlayer build"
+    "contentlayer": "NODE_ENV=production npx contentlayer build"
   }, 
   "dependencies": {
     "@next/mdx": "^16.0.7",

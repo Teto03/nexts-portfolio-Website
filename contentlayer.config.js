@@ -24,6 +24,10 @@ export const Project = defineDocumentType(() => ({
       type: "boolean",
       default: true,
     },
+    featured: {
+      type: "boolean",
+      default: false,
+    },
     title: {
       type: "string",
       required: true,

@@ -1,0 +1,59 @@
+---
+title: "NovaBanca Risk Assessment"
+description: End-to-end cyber security risk assessment of a fictional bank with SESAR SecRAM 2.0 — 9 primary and 25 supporting assets, 70 threat scenarios, a full risk register and a treatment plan that brings every residual risk down to Medium or Low.
+repository: Teto03/secram-novabanca
+date: "2026-09-23"
+published: true
+featured: true
+tags:
+  - Cyber Risk
+  - SecRAM 2.0
+  - DORA
+  - Threat Modeling
+  - GRC
+---
+
+End-to-end security risk assessment of **NovaBanca S.p.A., a fictional Italian bank**, carried out for the *Cyber Security Risk Assessment* course of the MSc in Computer Science (Cybersecurity) at the University of Trento, A.Y. 2025/26.
+
+The assessment follows **SecRAM 2.0**, the security risk assessment methodology developed within the European SESAR programme for air traffic management, adapted here to a banking context.
+
+## Scope
+
+The target of evaluation is the whole ICT estate of NovaBanca, a retail and corporate bank (€18.4 bn total assets, 680,000 retail customers, 47 branches) supervised as a Significant Institution.
+
+- **9 primary assets** and **25 supporting assets**, from the Temenos T24 core and SWIFT to Active Directory, backups, the network MSP and the ATM fleet
+- **70 threat scenarios** scored on the bank's 5×5 likelihood–impact matrix
+- Two non-malicious resilience scenarios (power outage, data-centre loss) to reflect **DORA**'s operational-resilience scope
+
+**Before treatment:** 6 Critical, 30 High, 34 Medium. **After treatment:** every residual risk is Medium or Low.
+
+## Method
+
+1. Primary assets identification and impact assessment (confidentiality, integrity, availability)
+2. Supporting assets identification
+3. Threat scenarios on supporting assets
+4. Likelihood evaluation
+5. Risk level evaluation
+6. Risk treatment: security controls and residual risk
+
+## Top risks
+
+| Threat scenario | Supporting asset | Risk | Main controls | Residual |
+|---|---|---|---|---|
+| Supply-chain compromise | Network MSP (third party) | **Critical** | Third-party risk programme (DORA Art. 28), zero-trust JIT access, PAM | Medium |
+| Exploit of unpatched CVEs | Temenos T24 core banking | **Critical** | Emergency / virtual patching (WAF), host IDS on AIX | Medium |
+| SWIFT fraud via privileged account | Active Directory / IAM | **Critical** | MFA on all privileged accounts, removal of 47 stale accounts, PAM | Medium |
+| Insider data exfiltration | Active Directory / IAM | **Critical** | DLP, PAM with session recording | Medium |
+| Ransomware | Backup & DR systems | **Critical** | Immutable / offline backups, quarterly DR test | Medium |
+
+A cross-cutting finding: the four-month CISO vacancy raises the likelihood of almost every scenario, so appointing a permanent CISO underpins most of the treatment plan.
+
+## Deliverables
+
+- [Full risk assessment report (PDF)](https://github.com/Teto03/secram-novabanca/tree/main/report)
+- [Risk register](https://github.com/Teto03/secram-novabanca/tree/main/risk-register) — Excel workbook plus CSV exports
+- [Methodology notes and assumptions](https://github.com/Teto03/secram-novabanca/tree/main/methodology)
+
+## Notes
+
+NovaBanca S.p.A. is fictional: no real organization or data is involved. Individual project.

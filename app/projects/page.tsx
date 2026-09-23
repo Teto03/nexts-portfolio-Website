@@ -33,8 +33,9 @@ export default async function ProjectsPage() {
 
   const sorted = published.sort(
     (a, b) =>
+      Number(b.featured) - Number(a.featured) ||
       new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
-      new Date(a.date ?? Number.POSITIVE_INFINITY).getTime(),
+        new Date(a.date ?? Number.POSITIVE_INFINITY).getTime(),
   );
 
   return (
@@ -46,7 +47,7 @@ export default async function ProjectsPage() {
             Projects
           </h2>
           <p className="mt-4 mb-6 text-zinc-400">
-            Some of the projects are made for university exams and some are on my own time.
+            Security work first: offensive practice, cyber risk assessment and AI security research, followed by the systems and software projects that built my foundations.
           </p>
         </div>
         <div className="w-full h-px bg-zinc-800" />

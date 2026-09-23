@@ -37,7 +37,7 @@ export default function Home() {
 
       <div className="my-12 sm:my-16 text-center animate-fade-in max-w-2xl">
         <h2 className="text-sm sm:text-base text-zinc-400 text-balance leading-relaxed">
-          Master&rsquo;s student in Computer Science at the University of Trento, passionate about technology and cybersecurity, driven to solve problems and create innovative solutions.
+          MSc Computer Science (Cybersecurity) student at the University of Trento, focused on offensive security and cyber risk. I break things in the lab to learn how to defend them.
         </h2>
       </div>
     </div>

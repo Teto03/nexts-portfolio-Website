@@ -11,11 +11,11 @@ export const metadata: Metadata = {
     template: "%s | bianchifrancesco.dev",
   },
   description:
-    "Master's student in Computer Science at the University of Trento. Passionate about cybersecurity, machine learning and software engineering.",
+    "MSc Computer Science (Cybersecurity) student at the University of Trento. Offensive security, cyber risk assessment and AI security.",
   openGraph: {
     title: "Francesco Bianchi — bianchifrancesco.dev",
     description:
-      "Master's student in Computer Science at the University of Trento. Passionate about cybersecurity, machine learning and software engineering.",
+      "MSc Computer Science (Cybersecurity) student at the University of Trento. Offensive security, cyber risk assessment and AI security.",
     url: "https://bianchifrancesco.dev",
     siteName: "bianchifrancesco.dev",
     locale: "en-US",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   twitter: {
     title: "Francesco Bianchi",
     description:
-      "Master's student in Computer Science at the University of Trento. Passionate about cybersecurity, machine learning and software engineering.",
+      "MSc Computer Science (Cybersecurity) student at the University of Trento. Offensive security, cyber risk assessment and AI security.",
     card: "summary_large_image",
   },
   icons: {

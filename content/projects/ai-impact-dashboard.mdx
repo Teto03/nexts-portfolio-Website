@@ -1,0 +1,50 @@
+---
+title: "AI Impact Dashboard"
+description: "Does AI boost grades while undermining real understanding? An interactive Plotly Dash dashboard analysing three datasets on how students use AI tools and what it does to their grades and critical thinking."
+repository: Teto03/Data_Viz_lab-project
+date: "2026-06-12"
+published: true
+tags:
+  - Python
+  - Plotly Dash
+  - Data Visualization
+  - Docker
+contributors:
+  - Hassan Faour
+---
+
+A Data Visualization project exploring the impact of AI usage (e.g. ChatGPT) on university students' grades and critical thinking.
+
+## Overview
+
+The dashboard visualizes the **"Paradox Gap"**: increased AI usage may correlate with higher grades but lower critical thinking and real understanding. It combines three datasets covering thousands of students worldwide.
+
+## Key insights explored
+
+- **Adoption** — ChatGPT adoption rates by field of study and usage intensity
+- **The paradox** — gap between grades and perceived critical thinking by AI usage intensity
+- **Dependency** — how intensive users rely on AI for more tasks at once
+- **Grade delta** — grades before and after AI adoption
+- **Perceptions** — student emotions, satisfaction and attitudes toward AI in education
+
+## Datasets
+
+1. **Global survey** — real dataset (Aristovnik et al., 2024), 23,218 records across 109 countries
+2. **Local survey** — real survey on AI perception among students (n=91)
+3. **Usage metrics** — semi-synthetic dataset modelling the impact of AI on grades (n=100)
+
+## Architecture
+
+The code is split by concern: `config.py` (themes and layout), `data.py` (ingestion, cleaning, KPIs), `figures.py` (Plotly charts) and `app.py` (Dash UI).
+
+## How to run
+
+```bash
+docker compose up --build
+```
+
+Then open `http://localhost:8050`.
+
+## Credits
+
+Developed as a Data Visualization Lab course project, together with Hassan Faour.

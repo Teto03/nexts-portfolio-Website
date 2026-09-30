@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { unstable_cache } from "next/cache";
 import { allProjects } from "@/.contentlayer/generated";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
@@ -8,24 +9,28 @@ import { Eye } from "lucide-react";
 
 export const revalidate = 60;
 
-async function getViews(slugs: string[]): Promise<Record<string, number>> {
-  if (slugs.length === 0) return {};
-  try {
-    const redis = Redis.fromEnv();
-    const keys = slugs.map((s) => ["pageviews", "projects", s].join(":"));
-    const viewsArray = await redis.mget<number[]>(...keys);
-    return slugs.reduce((acc, slug, i) => {
-      const viewCount = viewsArray?.[i];
-      acc[slug] = typeof viewCount === "number" ? viewCount : 0;
-      return acc;
-    }, {} as Record<string, number>);
-  } catch {
-    return slugs.reduce((acc, slug) => {
-      acc[slug] = 0;
-      return acc;
-    }, {} as Record<string, number>);
-  }
-}
+const getViews = unstable_cache(
+  async (slugs: string[]): Promise<Record<string, number>> => {
+    if (slugs.length === 0) return {};
+    try {
+      const redis = Redis.fromEnv({ retry: { retries: 1, backoff: () => 100 } });
+      const keys = slugs.map((s) => ["pageviews", "projects", s].join(":"));
+      const viewsArray = await redis.mget<number[]>(...keys);
+      return slugs.reduce((acc, slug, i) => {
+        const viewCount = viewsArray?.[i];
+        acc[slug] = typeof viewCount === "number" ? viewCount : 0;
+        return acc;
+      }, {} as Record<string, number>);
+    } catch {
+      return slugs.reduce((acc, slug) => {
+        acc[slug] = 0;
+        return acc;
+      }, {} as Record<string, number>);
+    }
+  },
+  ["projects-views"],
+  { revalidate: 60 },
+);
 
 export default async function ProjectsPage() {
   const published = allProjects.filter((p) => p.published === true);

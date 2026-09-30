@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { unstable_cache } from "next/cache";
 import { allProjects } from "@/.contentlayer/generated";
 import { Mdx } from "@/app/components/mdx";
 import { Header } from "./header";
@@ -14,14 +15,18 @@ type Props = {
   }>;
 };
 
-async function getViews(slug: string): Promise<number> {
-  try {
-    const redis = Redis.fromEnv();
-    return (await redis.get<number>(["pageviews", "projects", slug].join(":"))) ?? 0;
-  } catch {
-    return 0;
-  }
-}
+const getViews = unstable_cache(
+  async (slug: string): Promise<number> => {
+    try {
+      const redis = Redis.fromEnv({ retry: { retries: 1, backoff: () => 100 } });
+      return (await redis.get<number>(["pageviews", "projects", slug].join(":"))) ?? 0;
+    } catch {
+      return 0;
+    }
+  },
+  ["project-views"],
+  { revalidate: 60 },
+);
 
 export async function generateStaticParams() {
   return allProjects

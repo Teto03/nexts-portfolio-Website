@@ -25,6 +25,7 @@ export default function Particles({
 	const mousePosition = useMousePosition();
 	const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 	const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
+	const animationFrame = useRef<number | null>(null);
 	const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
 
 	useEffect(() => {
@@ -37,6 +38,10 @@ export default function Particles({
 
 		return () => {
 			window.removeEventListener("resize", initCanvas);
+			if (animationFrame.current !== null) {
+				cancelAnimationFrame(animationFrame.current);
+				animationFrame.current = null;
+			}
 		};
 	}, []);
 
@@ -223,7 +228,7 @@ export default function Particles({
 				);
 			}
 		});
-		window.requestAnimationFrame(animate);
+		animationFrame.current = window.requestAnimationFrame(animate);
 	};
 
 	return (

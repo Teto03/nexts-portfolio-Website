@@ -39,9 +39,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.png",
+    icon: "/icona.jpg",
+    shortcut: "/icona.jpg",
+    apple: "/icona.jpg",
   },
 };
 const inter = Inter({
@@ -72,9 +72,9 @@ export default function RootLayout({
       )}
     >
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        <link rel="icon" href="/icona.jpg" />
+        <link rel="shortcut icon" href="/icona.jpg" />
+        <link rel="apple-touch-icon" href="/icona.jpg" />
       </head>
       <body
         className={`bg-black ${

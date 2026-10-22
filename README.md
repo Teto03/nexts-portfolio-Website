@@ -1,7 +1,7 @@
 <div align="center">
     <a href="https://bianchifrancesco.dev"><h1 align="center">bianchifrancesco.dev</h1></a>
 
-My personal website, built with [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Upstash](https://upstash.com?ref=bianchifrancesco.dev), [Contentlayer](https://www.contentlayer.dev/) and deployed to [Vercel](https://vercel.com/).
+My personal website, built with [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Upstash](https://upstash.com?ref=bianchifrancesco.dev) and deployed to [Vercel](https://vercel.com/).
 
 </div>
 

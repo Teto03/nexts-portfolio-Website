@@ -1,5 +1,3 @@
-import { withContentlayer } from "next-contentlayer";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
@@ -21,4 +19,4 @@ const nextConfig = {
 	turbopack: {},
 };
 
-export default withContentlayer(nextConfig);
+export default nextConfig;

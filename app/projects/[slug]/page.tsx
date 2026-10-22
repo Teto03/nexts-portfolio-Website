@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { unstable_cache } from "next/cache";
-import { allProjects } from "@/.contentlayer/generated";
+import { allProjects } from "@/lib/projects";
 import { Mdx } from "@/app/components/mdx";
 import { Header } from "./header";
 import "./mdx.css";
@@ -46,7 +46,7 @@ export default async function PostPage({ params }: Props) {
 
   const views = await getViews(slug);
 
-  const contributors = (project as { contributors?: string[] }).contributors;
+  const contributors = project.contributors;
 
   return (
     <div className="min-h-screen bg-gradient-to-tl from-zinc-900 via-zinc-900/95 to-black">
@@ -54,7 +54,7 @@ export default async function PostPage({ params }: Props) {
       <ReportView slug={project.slug} />
 
       <article className="px-6 py-12 mx-auto max-w-3xl prose prose-invert prose-zinc prose-quoteless">
-        <Mdx code={project.body.code} />
+        <Mdx source={project.body} />
       </article>
 
       {contributors && contributors.length > 0 ? (

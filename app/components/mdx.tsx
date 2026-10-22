@@ -2,7 +2,26 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useMDXComponent } from "next-contentlayer/hooks";
+import * as runtime from "react/jsx-runtime";
+import { evaluate } from "@mdx-js/mdx";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
+
+const rehypePrettyCodeOptions = {
+	theme: "github-dark",
+	onVisitLine(node) {
+		if (node.children.length === 0) {
+			node.children = [{ type: "text", value: " " }];
+		}
+	},
+	onVisitHighlightedLine(node) {
+		node.properties.className.push("line--highlighted");
+	},
+	onVisitHighlightedWord(node) {
+		node.properties.className = ["word--highlighted"];
+	},
+};
 
 function clsx(...args: any) {
 	return args.filter(Boolean).join(" ");
@@ -164,11 +183,15 @@ const components = {
 };
 
 interface MdxProps {
-	code: string;
+	source: string;
 }
 
-export function Mdx({ code }: MdxProps) {
-	const Component = useMDXComponent(code);
+export async function Mdx({ source }: MdxProps) {
+	const { default: Component } = await evaluate(source, {
+		...runtime,
+		remarkPlugins: [remarkGfm],
+		rehypePlugins: [rehypeSlug, [rehypePrettyCode, rehypePrettyCodeOptions]],
+	});
 
 	return (
 		<div className="mdx">

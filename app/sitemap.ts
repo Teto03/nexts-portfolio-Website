@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { allProjects } from "@/.contentlayer/generated";
+import { allProjects } from "@/lib/projects";
 
 const SITE_URL = "https://bianchifrancesco.dev";
 

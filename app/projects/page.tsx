@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { unstable_cache } from "next/cache";
-import { allProjects } from "@/.contentlayer/generated";
+import { allProjects } from "@/lib/projects";
 import { Navigation } from "../components/nav";
 import { Card } from "../components/card";
 import { Redis } from "@upstash/redis";

@@ -28,6 +28,9 @@ const getViews = unstable_cache(
   { revalidate: 60 },
 );
 
+// Only the published projects are valid pages: any other slug is a 404.
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return allProjects
     .filter((p) => p.published)
@@ -40,7 +43,7 @@ export default async function PostPage({ params }: Props) {
   const { slug } = await params;
   const project = allProjects.find((project) => project.slug === slug);
 
-  if (!project) {
+  if (!project || !project.published) {
     notFound();
   }
 

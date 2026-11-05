@@ -1,0 +1,86 @@
+---
+title: "FakeBitInvestigation: Capture the Mark 2026"
+description: Robust, non-blind image watermarking for the Multimedia Data Security challenge. The same 1024-bit mark is embedded in the global DCT and in a db4 wavelet, read back with a gain-invariant detection (τ = 0.087 at 0.1% FPR), and paired with an adaptive attack engine that broke 23 of 27 images from the other teams.
+repository: Giulio020202/DMDS2026-FakeBitInvestigation
+date: "2026-11-04"
+published: true
+featured: true
+tags:
+  - Multimedia Security
+  - Digital Watermarking
+  - Python
+  - DCT
+  - Wavelet
+contributors:
+  - Giulio Bazzoli
+  - Luca Dematté
+---
+
+**Capture the Mark** is the attack-and-defence challenge of the *Multimedia Data Security* course (MSc in Computer Science, Cybersecurity, University of Trento, A.Y. 2025/26). Every team designs an invisible watermarking scheme to protect its own images, then tries to remove the other teams' watermarks without ruining the pictures. Our team, **FakeBitInvestigation (FBI)**, submitted version 2.0, a hybrid DCT + wavelet scheme.
+
+## The game
+
+- **Defence:** embed a 1024-bit watermark in 512×512 grayscale images. Image quality is measured with **WPSNR**, a PSNR weighted by the eye's contrast sensitivity. A higher WPSNR earns more quality points, and the lower the WPSNR an attacker has to go to remove the mark, the more robustness points you get.
+- **Attack:** remove the other teams' watermarks using only the allowed attacks (AWGN, blur, sharpening, JPEG, resize, median, alone, chained or applied to part of the image). The attacked image has to stay above 35 dB WPSNR.
+- **Constraints:** non-blind detection in a single file, under 5 seconds per call. The detection may not read the watermark file, and one threshold τ chosen from a ROC curve applies to every image.
+
+## Embedding
+
+- **Differential pairs.** Each bit is written on two neighbouring coefficients: one magnitude goes up by *a·w* and the other goes down by *a·w*. Attacks that scale everything by a common gain *g* (blur, sharpening, resize, contrast) cancel out in the difference, so the extracted vector only changes by *g* and its cosine similarity does not change at all.
+- **Two domains, one band.** The same watermark is written twice, in the **global DCT** (1024 pairs in the radial band 32 ≤ r ≤ 128) and in the **db4 wavelet** (detail subbands of levels 3 and 4). Both cover the same mid frequencies. The DCT spreads each bit over the whole image, while each wavelet coefficient only covers a small area. Mid frequencies are where WPSNR charges almost the same cost for energy, and where blur, median and JPEG cannot remove the mark without also damaging the image.
+- **Coefficient selection.** We use the 1024 pairs with the largest magnitudes in the original image. They give stable ratios, they matter to the image, and the non-blind detection can find them again from the original.
+- **Calibrated strength.** A bisection on the global scale *s* finds the strongest watermark that keeps WPSNR at 62.05 dB or above, measured with the course's exact WPSNR code. That is just above the threshold of the 5-point quality band.
+
+## Detection
+
+1. Find the exact DCT and wavelet pairs again from the original image.
+2. Extract the watermark from the watermarked image and from the attacked image (2048 values each, DCT and wavelet together).
+3. Compute the cosine similarity on **six variants** of the attacked image, including resize resynchronisation and spatial weighting by how damaged each zone is, and keep the best result.
+4. The watermark is present if similarity ≥ **τ = 0.087**. The original image always gives a null vector, so it is correctly reported as unmarked.
+
+Average time: **0.56 s per call**, well under the 5 s limit.
+
+## ROC and threshold
+
+τ comes from **101 images × 40 random attacks**, with 70% of the images used for calibration and 30% kept as a held-out test set. Besides the random-watermark false positives required by the rules, calibration also included more realistic negatives: the same attacks applied to the unmarked original, and to images carrying another team's watermark. τ is the lowest threshold with FPR ≤ 0.1% for every negative class.
+
+| Negative class | Threshold at FPR ≤ 0.1% |
+|---|---|
+| Random watermarks | 0.0835 |
+| Attacked original | 0.0841 |
+| Another team's watermark | 0.0867 |
+
+Rounded up to **τ = 0.087**. On the test set, with τ fixed: FPR 0.058% / 0% / 0%, **TPR 97.6%** (99.6% on attacks with WPSNR ≥ 35 dB).
+
+![ROC curve of the detection](/projects/fakebitinvestigation/roc.png)
+
+## Robustness
+
+We tested 104 images against an **adaptive attacker** that queries our own detection (about 700 calls per image) to find the lightest attack that works. At 62.05 dB, every successful attack had to bring the image down to about **37 dB** on average, which falls in the 35–38 dB band worth the maximum robustness score. The weakest point is still JPEG, alone or chained with blur and median.
+
+## Attack engine
+
+All our attacks are in one self-contained module. `attack_image()` automates the search:
+
+1. Tries **25 attack families** (single attacks and chains, from lightest to strongest) on the whole image and on **7 zones**: the smoothest 30/50/70% (also on 8×8 blocks), the most textured 30/50%, and edges. Zones are computed from the watermarked image only, never from the original.
+2. Uses a fast FFT-based WPSNR, identical to the course's code, to skip any attack that would drop below 35 dB before calling the detection.
+3. Runs a binary search for the lightest parameter that breaks the image, using the attacked team's detection as the oracle (the TAs confirmed this was allowed).
+4. Restores the 64×64 and 32×32 blocks that are not needed to remove the mark, which raises the final WPSNR.
+5. Keeps the successful attack with the highest WPSNR and writes the challenge log.
+
+Example: *JPEG QF=50 + JPEG QF=5 on the smoothest 50% (8×8 blocks)* broke one image at 40.74 dB. After the block restoration in step 4, it ended at **45.83 dB**.
+
+## Challenge results (4 November 2026)
+
+- **23 / 27** successful attacks
+- **9 / 9** teams attacked
+- Average WPSNR of our attacks: **49.21 dB**
+- Highest WPSNR: **66.67 dB**
+
+## Technologies
+
+Python 3.10, NumPy, SciPy, OpenCV, PyWavelets, scikit-image, scikit-learn, Matplotlib.
+
+## Source
+
+Code, ROC pipeline, demo images and the full technical write-up are available in the [GitHub repository](https://github.com/Giulio020202/DMDS2026-FakeBitInvestigation).
